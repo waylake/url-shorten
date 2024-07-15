@@ -3,6 +3,9 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+// Set the strictQuery option to suppress the warning
+mongoose.set("strictQuery", false);
+
 export const connectDB = async () => {
   try {
     await mongoose.connect(
