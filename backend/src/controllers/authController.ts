@@ -18,21 +18,33 @@ export const register = async (req: Request, res: Response) => {
 export const login = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
+
     const user = await User.findOne({ email });
     if (!user) {
+      console.log(`Login attempt failed: User not found for email ${email}`);
       return res.status(400).json({ message: "Invalid credentials" });
     }
+
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
+      console.log(`Login attempt failed: Invalid password for email ${email}`);
       return res.status(400).json({ message: "Invalid credentials" });
     }
+
+    if (!process.env.JWT_SECRET) {
+      console.error("JWT_SECRET is not defined in environment variables");
+      return res.status(500).json({ message: "Internal server error" });
+    }
+
     const token = jwt.sign(
       { userId: user._id, username: user.username },
-      process.env.JWT_SECRET as string,
+      process.env.JWT_SECRET,
       { expiresIn: "7d" },
     );
+
     res.json({ token, username: user.username });
   } catch (error) {
+    console.error("Error in login function:", error);
     res.status(500).json({ message: "Error logging in" });
   }
 };
