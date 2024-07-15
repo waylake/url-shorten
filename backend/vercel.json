@@ -1,9 +1,9 @@
 {
   "version": 2,
   "functions": {
-    "api/index.js": {
+    "src/index.ts": {
       "runtime": "@vercel/node@3.0.0"
     }
   },
-  "rewrites": [{ "source": "/(.*)", "destination": "/api/index.js" }]
+  "rewrites": [{ "source": "/(.*)", "destination": "/src/index.ts" }]
 }
