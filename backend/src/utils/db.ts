@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017";
+mongoose.set("strictQuery", false);
 
 export const connectDB = async () => {
   try {
