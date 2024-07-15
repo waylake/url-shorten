@@ -1,17 +1,13 @@
 {
   "version": 2,
   "functions": {
-    "api/index.js": {
+    "api/*.js": {
       "runtime": "nodejs18.x"
     }
   },
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/api/index.js"
-    },
-    {
-      "source": "/health",
       "destination": "/api/index.js"
     }
   ]
