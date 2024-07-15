@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    { "source": "/login", "destination": "/login" },
+    { "source": "/register", "destination": "/register" },
+    { "source": "/dashboard", "destination": "/dashboard" },
+    { "source": "/insights/:shortUrl", "destination": "/insights/:shortUrl" },
+    { "source": "/(.*)", "destination": "/" }
+  ]
+}
